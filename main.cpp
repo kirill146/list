@@ -5,7 +5,7 @@ using namespace std;
 template <typename T>
 void print(list<T> const& a) {
     for (typename list<T>::const_iterator it = a.begin(); it != a.end(); it++) {
-        cout << *it;
+        cout << *it << ' ';
     }
     cout << endl;
 }
@@ -13,7 +13,7 @@ void print(list<T> const& a) {
 template <typename T>
 void print_reverse(list<T> const& a) {
     for (typename list<T>::const_reverse_iterator it = a.rbegin(); it != a.rend(); it++) {
-        cout << *it;
+        cout << *it << ' ';
     }
     cout << endl;
 }
