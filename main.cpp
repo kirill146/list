@@ -4,20 +4,16 @@ using namespace std;
 
 template <typename T>
 void print(list<T> const& a) {
-    typename list<T>::node_base* cur_node = a.fake_node.next;
-    while (cur_node != &a.fake_node) {
-        cout << static_cast<typename list<T>::node*>(cur_node)->data << ' ';
-        cur_node = cur_node->next;
+    for (typename list<T>::const_iterator it = a.begin(); it != a.end(); it++) {
+        cout << *it;
     }
     cout << endl;
 }
 
 template <typename T>
 void print_reverse(list<T> const& a) {
-    typename list<T>::node_base* cur_node = a.fake_node.prev;
-    while (cur_node != &a.fake_node) {
-        cout << static_cast<typename list<T>::node*>(cur_node)->data << ' ';
-        cur_node = cur_node->prev;
+    for (typename list<T>::const_reverse_iterator it = a.rbegin(); it != a.rend(); it++) {
+        cout << *it;
     }
     cout << endl;
 }

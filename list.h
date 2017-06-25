@@ -7,6 +7,7 @@
 
 template <typename T>
 struct list {
+private:
     struct node_base {
         node_base *prev, *next;
         node_base()
@@ -22,22 +23,21 @@ struct list {
             this->next = next;
         }
     };
+public:
     struct const_iterator;
     struct iterator {
         friend list;
+        friend const_iterator;
         typedef T value_type;
         typedef std::ptrdiff_t difference_type;
         typedef T* pointer;
         typedef T& reference;
         typedef std::bidirectional_iterator_tag iterator_category;
-    //private:
-    public:
+    private:
         node_base* p;
         iterator(node_base*);
-        iterator(const_iterator it) {
-            p = it.p;
-        }
     public:
+        iterator(const_iterator it);
         iterator& operator++();
         iterator& operator--();
         iterator operator++(int);
@@ -55,19 +55,17 @@ struct list {
 
     struct const_iterator {
         friend list;
+        friend iterator;
         typedef T const value_type;
         typedef std::ptrdiff_t difference_type;
         typedef T const* pointer;
         typedef T const& reference;
         typedef std::bidirectional_iterator_tag iterator_category;
-    //private:
-    public:
+    private:
         node_base* p;
         const_iterator(node_base*);
-        const_iterator(iterator it) {
-            p = it.p;
-        }
     public:
+        const_iterator(iterator it);
         const_iterator& operator++();
         const_iterator& operator--();
         const_iterator operator++(int);
@@ -83,19 +81,11 @@ struct list {
         }
     };
 
-    //typedef iterator_factory<node_base*> iterator;
-    //typedef iterator_factory<node_base const*> const_iterator;
     typedef std::reverse_iterator<iterator> reverse_iterator;
     typedef std::reverse_iterator<const_iterator> const_reverse_iterator;
 
 
-
-
-
-
-
-
-    node_base fake_node;
+    mutable node_base fake_node;
 
     list();
     list(list const&);
@@ -132,6 +122,11 @@ list<T>::iterator::iterator(list::node_base* p)
 {}
 
 template <typename T>
+list<T>::iterator::iterator(list::const_iterator it) {
+    p = it.p;
+}
+
+template <typename T>
 typename list<T>::iterator& list<T>::iterator::operator++() {
     p = p->next;
     return *this;
@@ -163,6 +158,10 @@ T& list<T>::iterator::operator*() {
 }
 
 
+template <typename T>
+list<T>::const_iterator::const_iterator(list::iterator it) {
+    p = it.p;
+}
 
 template <typename T>
 list<T>::const_iterator::const_iterator(list::node_base* p)
@@ -199,8 +198,6 @@ template <typename T>
 T const& list<T>::const_iterator::operator*() {
     return static_cast<node*>(p)->data;
 }
-
-
 
 
 template <typename T>
