@@ -37,7 +37,6 @@ public:
         node_base* p;
         iterator(node_base*);
     public:
-        iterator(const_iterator it);
         iterator& operator++();
         iterator& operator--();
         iterator operator++(int);
@@ -120,11 +119,6 @@ template <typename T>
 list<T>::iterator::iterator(list::node_base* p)
         :p(p)
 {}
-
-template <typename T>
-list<T>::iterator::iterator(list::const_iterator it) {
-    p = it.p;
-}
 
 template <typename T>
 typename list<T>::iterator& list<T>::iterator::operator++() {
@@ -377,7 +371,7 @@ typename list<T>::iterator list<T>::erase(const_iterator first, const_iterator l
     while (first != last) {
         first = erase(first);
     }
-    return iterator(last);
+    return iterator(last.p);
 }
 
 template <typename T>

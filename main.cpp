@@ -176,6 +176,14 @@ void T9() {
     cout << "------------------------\n";
 }
 
+void T10() {
+    list<int> a;
+    list<int>::iterator i1 = a.begin();
+    list<int>::const_iterator i2 = a.begin();
+    i1 == i2;
+    i1 != i2;
+}
+
 int main() {
     T1();
     T2();
@@ -186,5 +194,6 @@ int main() {
     T7();
     T8();
     T9();
+    T10();
     return 0;
 }
