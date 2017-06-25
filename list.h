@@ -314,7 +314,7 @@ void list<T>::pop_back() {
     node_base* p = fake_node.prev;
     fake_node.prev = p->prev;
     p->prev->next = &fake_node;
-    delete p;
+    delete static_cast<node*>(p);
 }
 
 template <typename T>
@@ -339,7 +339,7 @@ void list<T>::pop_front() {
     node_base* p = fake_node.next;
     fake_node.next = p->next;
     p->next->prev = &fake_node;
-    delete p;
+    delete static_cast<node*>(p);
 }
 
 template <typename T>
@@ -365,7 +365,7 @@ typename list<T>::iterator list<T>::erase(list<T>::const_iterator pos) {
     pos.p->next->prev = pos.p->prev;
     pos.p->prev->next = pos.p->next;
     iterator res(pos.p->next);
-    delete pos.p;
+    delete static_cast<node*>(pos.p);
     return res;
 }
 
@@ -386,6 +386,11 @@ void list<T>::splice(const_iterator pos, list& other, const_iterator first, cons
     first.p->prev = pos.p->prev;
     pos.p->prev->next = first.p;
     pos.p->prev = p;
+}
+
+template <typename T>
+void swap(list<T>& a, list<T>& b) {
+    a.swap(b);
 }
 
 #endif //LIST_LIST_H
