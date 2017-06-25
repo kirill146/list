@@ -148,6 +148,34 @@ void T7() {
     cout << "------------------------\n";
 }
 
+void T8() {
+    list<int> a;
+    for (int i = 1; i <= 4; i++) {
+        a.push_back(i);
+    }
+    list<int> b;
+    for (int i = 5; i <= 8; i++) {
+        b.push_back(i);
+    }
+    a = b;
+    print(a);
+    print(b);
+    cout << "------------------------\n";
+}
+
+void T9() {
+    list<int> a;
+    list<int> b;
+    b.push_back(1);
+    b.push_back(2);
+    a.splice(a.begin(), b, b.begin(), b.end());
+    print(a);
+    print(b);
+    print_reverse(a);
+    print_reverse(b);
+    cout << "------------------------\n";
+}
+
 int main() {
     T1();
     T2();
@@ -156,5 +184,7 @@ int main() {
     T5();
     T6();
     T7();
+    T8();
+    T9();
     return 0;
 }

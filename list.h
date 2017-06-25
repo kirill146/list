@@ -292,7 +292,10 @@ void list<T>::clear() {
 
 template <typename T>
 void list<T>::swap(list<T>& other) {
-    std::swap(fake_node, other.fake_node);
+    std::swap(fake_node.prev->next, other.fake_node.prev->next);
+    std::swap(fake_node.next->prev, other.fake_node.next->prev);
+    std::swap(fake_node.prev, other.fake_node.prev);
+    std::swap(fake_node.next, other.fake_node.next);
 }
 
 template <typename T>
