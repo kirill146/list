@@ -182,6 +182,7 @@ void T10() {
     list<int>::const_iterator i2 = a.begin();
     i1 == i2;
     i1 != i2;
+    cout << "------------------------\n";
 }
 
 void T11() {
@@ -203,10 +204,20 @@ void T12() {
     for (int i = 0; i < 4; i++) {
         a.push_back(i);
     }
-    swap(b, a);
+    swap(a, b);
     print(a);
     print(b);
-    cout << a.empty() << endl;
+    cout << a.empty() << ' ' << b.empty() << endl;
+    a.clear();
+    b.clear();
+    swap(a, b);
+    print(a);
+    print(b);
+    cout << a.empty() << ' ' << b.empty() << endl;
+    b.push_back(42);
+    swap(a, b);
+    print(a);
+    print(b);
     cout << "------------------------\n";
 }
 

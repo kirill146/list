@@ -286,20 +286,28 @@ void list<T>::clear() {
 
 template <typename T>
 void list<T>::swap(list<T>& other) {
-    if (!other.empty()) {
+    if (empty() && other.empty()) {
+        return;
+    }
+    if (!empty() && !other.empty()) {
         std::swap(fake_node.prev->next, other.fake_node.prev->next);
         std::swap(fake_node.next->prev, other.fake_node.next->prev);
         std::swap(fake_node.prev, other.fake_node.prev);
         std::swap(fake_node.next, other.fake_node.next);
-    } else {
-        node_base* p = &other.fake_node;
-        other.fake_node.next = fake_node.next;
-        other.fake_node.prev = fake_node.prev;
-        fake_node.prev->next = &other.fake_node;
-        fake_node.next->prev = &other.fake_node;
-        fake_node.prev = &fake_node;
-        fake_node.next = &fake_node;
+        return;
     }
+    node_base* first = &fake_node;
+    node_base* second = &other.fake_node;
+    if (!other.empty()) {
+        std::swap(first, second);
+    }
+    second->next = first->next;
+    second->prev = first->prev;
+    first->prev->next = second;
+    first->next->prev = second;
+    first->prev = first;
+    first->next = first;
+    return;
 }
 
 template <typename T>
@@ -400,11 +408,7 @@ void list<T>::splice(const_iterator pos, list& other, const_iterator first, cons
 
 template <typename T>
 void swap(list<T>& a, list<T>& b) {
-    if (a.empty()) {
-        b.swap(a);
-    } else {
-        a.swap(b);
-    }
+    a.swap(b);
 }
 
 #endif //LIST_LIST_H
