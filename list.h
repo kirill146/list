@@ -27,8 +27,8 @@ struct list {
         friend list;
         typedef T value_type;
         typedef std::ptrdiff_t difference_type;
-        typedef T const* pointer;
-        typedef T const& reference;
+        typedef T* pointer;
+        typedef T& reference;
         typedef std::bidirectional_iterator_tag iterator_category;
     //private:
     public:
