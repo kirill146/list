@@ -55,9 +55,7 @@ void T3() {
     for (int i = 0; i < 10; i++) {
         a.push_back(i);
     }
-    for (list<int>::reverse_iterator it = a.rbegin(); it != a.rend(); it++) {
-        cout << *it << ' ';
-    }
+    print_reverse(a);
     cout << endl;
     cout << "------------------------\n";
 }
