@@ -197,6 +197,19 @@ void T11() {
     cout << "------------------------\n";
 }
 
+void T12() {
+    list<int> a;
+    list<int> b;
+    for (int i = 0; i < 4; i++) {
+        a.push_back(i);
+    }
+    swap(b, a);
+    print(a);
+    print(b);
+    cout << a.empty() << endl;
+    cout << "------------------------\n";
+}
+
 int main() {
     T1();
     T2();
@@ -209,5 +222,6 @@ int main() {
     T9();
     T10();
     T11();
+    T12();
     return 0;
 }
