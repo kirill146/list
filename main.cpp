@@ -129,6 +129,31 @@ void T6() {
     cout << "------------------------\n";
 }
 
+void T7() {
+    list<string> a;
+    a.push_front("hello");
+    a.push_back("world");
+    print(a); // hello world
+    list<string>::iterator it = a.begin();
+    it++;
+    a.erase(it);
+    print(a); // hello
+    a.push_back("world");
+    it = a.end();
+    it--;
+    list<string> b;
+    b.push_back("abacaba");
+    b.push_back("abracadabra");
+    print(b); // abacaba abracadabra
+    b.push_back("avadakedavra");
+    list<string>::iterator jt = b.end();
+    jt--;
+    a.splice(it, b, b.begin(), jt);
+    print(a); // hello abacaba abracadabra world
+    print(b); // avadakedavra
+    cout << "------------------------\n";
+}
+
 int main() {
     T1();
     T2();
@@ -136,5 +161,6 @@ int main() {
     T4();
     T5();
     T6();
+    T7();
     return 0;
 }
