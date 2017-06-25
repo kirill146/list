@@ -376,6 +376,9 @@ typename list<T>::iterator list<T>::erase(const_iterator first, const_iterator l
 
 template <typename T>
 void list<T>::splice(const_iterator pos, list& other, const_iterator first, const_iterator last) {
+    if (first == last) {
+        return;
+    }
     first.p->prev->next = last.p;
     node_base* p = last.p->prev;
     last.p->prev = first.p->prev;

@@ -184,6 +184,19 @@ void T10() {
     i1 != i2;
 }
 
+void T11() {
+    list<int> a;
+    list<int> b;
+    a.push_back(1);
+    a.push_back(2);
+    a.splice(a.begin(), b, b.begin(), b.end());
+    print(a);
+    print(b);
+    print_reverse(a);
+    print_reverse(b);
+    cout << "------------------------\n";
+}
+
 int main() {
     T1();
     T2();
@@ -195,5 +208,6 @@ int main() {
     T8();
     T9();
     T10();
+    T11();
     return 0;
 }
